@@ -20,6 +20,7 @@ import { TimetableModal } from './components/TimetableModal';
 import { AnalyticsView } from './components/AnalyticsView';
 import { FocusTimer } from './components/FocusTimer';
 import { CodeExportModal } from './components/CodeExportModal';
+import { ConfirmModal } from './components/ConfirmModal';
 import { CheckCircle2, RotateCcw } from 'lucide-react';
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
   const [editingSlot, setEditingSlot] = useState<TimetableSlot | null>(null);
 
   const [isCodeExportOpen, setIsCodeExportOpen] = useState(false);
+  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
   const [selectedSubjectFilter, setSelectedSubjectFilter] = useState<string>('ALL');
 
   // Micro feedback toast
@@ -189,7 +191,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         onOpenNewTask={handleOpenNewTask}
         onOpenCodeExport={() => setIsCodeExportOpen(true)}
-        onResetData={handleResetAllData}
+        onResetData={() => setIsResetConfirmOpen(true)}
         pendingCount={pendingCount}
       />
 
@@ -288,6 +290,17 @@ export default function App() {
         onClose={() => setIsCodeExportOpen(false)}
       />
 
+      {/* Confirmation Dialog */}
+      <ConfirmModal
+        isOpen={isResetConfirmOpen}
+        onClose={() => setIsResetConfirmOpen(false)}
+        onConfirm={handleResetAllData}
+        title="Reset to Sample College Data?"
+        message="This will restore all default tasks and weekly timetable slots for Java, DSA, SQL, DBMS, OS, and Computer Networks. Any custom tasks you created will be reset."
+        confirmLabel="Reset Data"
+        confirmVariant="danger"
+      />
+
       {/* Quiet Footer */}
       <footer className="border-t border-slate-200 bg-white py-6 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
@@ -306,11 +319,7 @@ export default function App() {
             </button>
             <span aria-hidden="true" className="text-slate-300">·</span>
             <button
-              onClick={() => {
-                if (window.confirm('Reset all tasks and timetable to default college schedule?')) {
-                  handleResetAllData();
-                }
-              }}
+              onClick={() => setIsResetConfirmOpen(true)}
               className="hover:text-slate-800 transition-colors flex items-center gap-1"
             >
               <RotateCcw className="w-3 h-3" />

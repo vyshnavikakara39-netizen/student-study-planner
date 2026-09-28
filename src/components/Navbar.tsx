@@ -168,10 +168,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => {
-                if (window.confirm('Reset all planner tasks and timetable back to default college schedule?')) {
-                  onResetData();
-                  setMobileMenuOpen(false);
-                }
+                onResetData();
+                setMobileMenuOpen(false);
               }}
               className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs text-slate-500 hover:text-slate-700"
             >
