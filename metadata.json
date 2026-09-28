@@ -1,0 +1,6 @@
+{
+  "name": "StudyFlow - College Student Study Planner",
+  "description": "A modern, responsive study planner for college students to track tasks in Java, DSA, SQL, DBMS, OS, and Computer Networks, with daily timetables and progress tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
